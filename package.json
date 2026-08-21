@@ -1,0 +1,22 @@
+{
+  "name": "vigileye-ai",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Root runner for VigilEye AI — starts website, backend, and ml-model together.",
+  "scripts": {
+    "install:all": "npm install --prefix website && npm install --prefix backend && pip install -r ml-model/service/requirements.txt",
+    "dev": "node print-routes.js && concurrently -n website,backend,ml-model -c blue,green,yellow --prefix-colors auto \"npm run dev --prefix website\" \"npm run start:dev --prefix backend\" \"npm run dev:ml\"",
+    "dev:website": "npm run dev --prefix website",
+    "dev:backend": "npm run start:dev --prefix backend",
+    "dev:ml": "cd ml-model/service && uvicorn main:app --reload --host 0.0.0.0 --port 9000",
+
+    "install:ml-train": "pip install -r ml-model/requirements.txt",
+    "train:ml": "cd ml-model/training && python train.py --data dataset.yaml --base-model yolo11n.pt --epochs 20 --img 640 --batch 8 --no-wandb",
+    "eval:ml": "cd ml-model/training && python ../eval/evaluate.py --weights runs/train/vigileye-yolov11/weights/best.pt --data dataset.yaml --min-recall 0.10",
+    "export:ml": "cd ml-model/training && python ../export/export_onnx.py --weights runs/train/vigileye-yolov11/weights/best.pt --out ../models/yolov11-crack.onnx && cp runs/train/vigileye-yolov11/weights/best.onnx ../models/yolov11-crack.onnx",
+    "pipeline:ml": "npm run train:ml && npm run eval:ml && npm run export:ml"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

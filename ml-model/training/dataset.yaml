@@ -1,0 +1,21 @@
+# YOLO-format dataset config. combined_crack/ is generated from the real
+# CrackForest dataset (../datasets/crackforest/) by prepare_crackforest.py —
+# see ../datasets/README.md. It's a starter set (118 images); combine with
+# SDNET2018, CRACK500, and METU (same README) for a production training run.
+#
+# Single class: accuracy work here is about recall/localization quality,
+# not multi-class taxonomy — crack *type* (diagonal/vertical/map/etc.) is
+# a lightweight post-hoc classifier applied to each detected crop, not a
+# separate detection class, so the detector itself stays simple and robust.
+
+path: ../datasets/combined_crack
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: crack
+
+# Recall is prioritized over precision throughout training + eval (PRD
+# Section 19) — a missed crack is materially worse than a false positive a
+# human dismisses in seconds.

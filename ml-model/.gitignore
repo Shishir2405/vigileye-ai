@@ -1,0 +1,23 @@
+*.pt
+*.onnx
+*.engine
+*.tflite
+*.ckpt
+runs/
+wandb/
+mlruns/
+# datasets/crackforest (raw, ~11MB) and datasets/combined_crack (derived
+# YOLO+mask training set) are intentionally tracked — see datasets/README.md.
+# Ignore any *other* dataset dropped in here (e.g. full SDNET2018/CRACK500/
+# METU pulls), since those run into GBs.
+datasets/*/
+!datasets/.gitkeep
+!datasets/README.md
+!datasets/crackforest/
+!datasets/combined_crack/
+models/*
+!models/.gitkeep
+__pycache__/
+*.pyc
+.venv/
+venv/

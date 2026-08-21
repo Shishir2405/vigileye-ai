@@ -1,0 +1,15 @@
+# Training / evaluation / export environment.
+# service/requirements.txt is the separate, lighter inference-only set.
+
+ultralytics>=8.3.0        # YOLOv11 detection
+torch>=2.3.0
+torchvision>=0.18.0
+segmentation-models-pytorch>=0.3.4   # DeepLabV3+/U-Net for width segmentation
+albumentations>=1.4.0     # domain-randomized augmentation
+opencv-python-headless>=4.10.0
+numpy>=1.26.0
+pandas>=2.2.0
+onnx>=1.16.0
+onnxruntime>=1.18.0
+wandb>=0.17.0             # experiment tracking (MLflow is an accepted swap-in)
+pyyaml>=6.0.1

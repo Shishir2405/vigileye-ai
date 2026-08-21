@@ -1,0 +1,12 @@
+# Inference-only environment — lighter than ml-model/requirements.txt
+# (no training/augmentation/experiment-tracking deps).
+
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+onnxruntime>=1.18.0
+opencv-python-headless>=4.10.0
+numpy>=1.26.0
+pillow>=10.3.0
+python-multipart>=0.0.9
+pydantic>=2.7.0
+scikit-image>=0.24.0   # skeletonize + distance transform for segmentation.py width measurement
